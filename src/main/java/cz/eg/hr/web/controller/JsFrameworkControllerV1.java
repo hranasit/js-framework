@@ -1,5 +1,8 @@
 package cz.eg.hr.web.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
 import cz.eg.hr.data.model.JsFramework;
 import cz.eg.hr.service.JsFrameworkService;
 import cz.eg.hr.web.mapper.JsFrameworkBaseMapper;
@@ -40,9 +43,15 @@ public class JsFrameworkControllerV1 {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<JsFrameworkV1> update(@PathVariable Long id, @RequestBody JsFrameworkBaseV1 data) {
-//        return new jsFrameworkService.update(id, data);
-        throw new NotYetImplementedException();
+    public ResponseEntity<JsFrameworkV1> update(@PathVariable Long id, @RequestBody JsonPatch data) {
+        try {
+            jsFrameworkService.update(id, data);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        } catch (JsonPatchException | JsonProcessingException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/{id}")

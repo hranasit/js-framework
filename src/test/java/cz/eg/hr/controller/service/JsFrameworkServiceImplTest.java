@@ -30,15 +30,28 @@ public class JsFrameworkServiceImplTest extends AbstractJsFrameworkTest {
         Optional<JsFramework> result = repository.findById(1L);
         assertTrue(result.isPresent());
 
-        repository.delete(result.get()); //TODO
+        repository.deleteById(1L);
     }
 
     @Test
     public void findAll() {
-        repository.saveAll(prepareJsFrameworks());
-
         Page<JsFramework> result = service.findAll(Pageable.ofSize(10));
         assertEquals(2, result.getTotalElements());
+    }
+
+    @Test
+    void update() {
+        //TODO
+    }
+
+    @Test
+    void update_notFound() {
+        //TODO
+    }
+
+    @Test
+    void update_wrongPatch() {
+        //TODO
     }
 
     @Test
@@ -48,8 +61,6 @@ public class JsFrameworkServiceImplTest extends AbstractJsFrameworkTest {
 
     @Test
     public void delete_notFound() {
-        repository.saveAll(prepareJsFrameworks());
-
         assertThrows(EntityNotFoundException.class, () -> service.delete(42L));
     }
 }

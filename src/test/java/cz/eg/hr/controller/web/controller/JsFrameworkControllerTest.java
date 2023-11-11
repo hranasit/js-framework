@@ -54,6 +54,21 @@ class JsFrameworkControllerTest extends AbstractJsFrameworkTest {
     }
 
     @Test
+    void update() {
+        //TODO
+    }
+
+    @Test
+    void update_notFound() {
+        //TODO
+    }
+
+    @Test
+    void update_wrongPatch() {
+        //TODO
+    }
+
+    @Test
     void delete() throws Exception {
         //TODO
     }

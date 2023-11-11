@@ -1,5 +1,8 @@
 package cz.eg.hr.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
 import cz.eg.hr.data.model.JsFramework;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +18,7 @@ public interface JsFrameworkService {
 
     Page<JsFramework> findAll(Pageable pageable);
 
-    JsFramework update(Long id, JsFramework jsFramework);
+    void update(Long id, JsonPatch patch) throws JsonPatchException, JsonProcessingException;
 
     void delete(Long id);
 }
