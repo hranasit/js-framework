@@ -44,6 +44,20 @@ class JsFrameworkControllerTest extends AbstractJsFrameworkTest {
     }
 
     @Test
+    void create_invalidRating() throws Exception {
+        JsFrameworkBaseV1 data = prepareJsFrameworkBaseV1();
+        data.setRating(15);
+
+        mockMvc.perform(
+                MockMvcRequestBuilders
+                    .post("/v1/frameworks")
+                    .accept(MediaType.APPLICATION_JSON)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(buildRequestBody(data))
+            ).andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
     void findAll() throws Exception {
         mockMvc.perform(
                 MockMvcRequestBuilders
