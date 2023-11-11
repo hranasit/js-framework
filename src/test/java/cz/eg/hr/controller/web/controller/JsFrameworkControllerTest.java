@@ -1,9 +1,5 @@
 package cz.eg.hr.controller.web.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import cz.eg.hr.controller.AbstractJsFrameworkTest;
 import cz.eg.hr.web.model.JsFrameworkBaseV1;
 import org.junit.jupiter.api.Test;
@@ -55,5 +51,20 @@ class JsFrameworkControllerTest extends AbstractJsFrameworkTest {
                     .accept(MediaType.APPLICATION_JSON)
                     .contentType(MediaType.APPLICATION_JSON)
             ).andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void delete() throws Exception {
+        //TODO
+    }
+
+    @Test
+    void delete_notFound() throws Exception {
+        mockMvc.perform(
+            MockMvcRequestBuilders
+                .delete("/v1/frameworks/42")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 }

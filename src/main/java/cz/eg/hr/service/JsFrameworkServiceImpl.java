@@ -2,6 +2,7 @@ package cz.eg.hr.service;
 
 import cz.eg.hr.data.model.JsFramework;
 import cz.eg.hr.data.repository.JsFrameworkRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,6 +32,9 @@ public class JsFrameworkServiceImpl implements JsFrameworkService {
 
     @Override
     public void delete(Long id) {
-        throw new NotYetImplementedException();
+        if (!jsFrameworkRepository.existsById(id)) {
+            throw new EntityNotFoundException();
+        }
+        jsFrameworkRepository.deleteById(id);
     }
 }

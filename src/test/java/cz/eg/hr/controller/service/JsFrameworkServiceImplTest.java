@@ -4,6 +4,7 @@ import cz.eg.hr.controller.AbstractJsFrameworkTest;
 import cz.eg.hr.data.model.JsFramework;
 import cz.eg.hr.data.repository.JsFrameworkRepository;
 import cz.eg.hr.service.JsFrameworkService;
+import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,8 +13,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class JsFrameworkServiceImplTest extends AbstractJsFrameworkTest {
@@ -37,7 +37,19 @@ public class JsFrameworkServiceImplTest extends AbstractJsFrameworkTest {
     public void findAll() {
         repository.saveAll(prepareJsFrameworks());
 
-        Page<JsFramework> result = repository.findAll(Pageable.ofSize(10));
+        Page<JsFramework> result = service.findAll(Pageable.ofSize(10));
         assertEquals(2, result.getTotalElements());
+    }
+
+    @Test
+    void delete() {
+        //TODO
+    }
+
+    @Test
+    public void delete_notFound() {
+        repository.saveAll(prepareJsFrameworks());
+
+        assertThrows(EntityNotFoundException.class, () -> service.delete(42L));
     }
 }
