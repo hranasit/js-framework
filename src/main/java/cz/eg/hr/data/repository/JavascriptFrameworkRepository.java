@@ -1,4 +1,4 @@
-package cz.eg.hr.repository;
+package cz.eg.hr.data.repository;
 
 import cz.eg.hr.data.JavascriptFramework;
 import org.springframework.data.repository.CrudRepository;
