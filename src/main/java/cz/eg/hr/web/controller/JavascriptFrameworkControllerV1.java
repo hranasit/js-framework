@@ -1,6 +1,6 @@
 package cz.eg.hr.web.controller;
 
-import cz.eg.hr.data.JavascriptFramework;
+import cz.eg.hr.data.model.JsFramework;
 import cz.eg.hr.data.repository.JavascriptFrameworkRepository;
 import cz.eg.hr.web.model.JsFrameworkV1;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class JavascriptFrameworkControllerV1 {
 
     //TODO fulltext somewhere
     @GetMapping
-    public Page<JavascriptFramework> list(Pageable pageable) {
+    public Page<JsFramework> list(Pageable pageable) {
         return new repository.findAll(pageable);
     }
 
