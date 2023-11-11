@@ -1,8 +1,12 @@
 package cz.eg.hr.web.controller;
 
 import cz.eg.hr.data.model.JsFramework;
-import cz.eg.hr.data.repository.JavascriptFrameworkRepository;
+import cz.eg.hr.service.JsFrameworkService;
+import cz.eg.hr.web.mapper.JsFrameworkBaseMapper;
+import cz.eg.hr.web.mapper.JsFrameworkMapper;
+import cz.eg.hr.web.model.JsFrameworkBaseV1;
 import cz.eg.hr.web.model.JsFrameworkV1;
+import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,36 +19,37 @@ import org.springframework.web.bind.annotation.*;
 public class JavascriptFrameworkControllerV1 {
     //TODO error handling, status codes
 
-    //TODO use service
-    private final JavascriptFrameworkRepository repository;
-
     @Autowired
-    public JavascriptFrameworkControllerV1(JavascriptFrameworkRepository repository) {
-        this.repository = repository;
-    }
+    private JsFrameworkService jsFrameworkService;
+
 
     @PostMapping
-    public ResponseEntity<JsFrameworkV1> create(@RequestBody JsFrameworkV1 data) {
-        JsFramework created = repository.create(data);
-        return new ResponseEntity<>(JsFrameworkV1.valueOf(created.getId()), HttpStatus.CREATED);
+    public ResponseEntity<JsFrameworkV1> create(@RequestBody JsFrameworkBaseV1 data) {
+        JsFramework jsFramework = JsFrameworkBaseMapper.toDomain(data);
+        JsFramework created = jsFrameworkService.create(jsFramework);
+        return new ResponseEntity<>(JsFrameworkMapper.toModel(created), HttpStatus.CREATED);
     }
 
     //TODO fulltext somewhere
     @GetMapping
-    public Page<JsFramework> list(Pageable pageable) {
-        return new repository.findAll(pageable);
+    public Page<JsFrameworkV1> list(Pageable pageable) {
+//        return new jsFrameworkService.findAll(pageable);
+        throw new NotYetImplementedException();
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<JsFrameworkV1> update(@RequestParam Long id, @RequestBody JsFrameworkV1 data) {
-        return new repository.update(id, data);
+    public ResponseEntity<JsFrameworkV1> update(@RequestParam Long id, @RequestBody JsFrameworkBaseV1 data) {
+//        return new jsFrameworkService.update(id, data);
+        throw new NotYetImplementedException();
     }
 
     @DeleteMapping("/{id}")
     //TODO
-    public ResponseEntity<> delete(@RequestParam Long id) {
-        repository.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<JsFrameworkV1> delete(@RequestParam Long id) {
+        throw new NotYetImplementedException();
+
+//        jsFrameworkService.delete(id);
+//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

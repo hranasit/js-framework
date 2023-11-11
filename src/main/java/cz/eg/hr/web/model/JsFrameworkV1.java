@@ -1,10 +1,13 @@
 package cz.eg.hr.web.model;
 
-import java.util.Date;
+import java.util.List;
 
-public class JsFrameworkV1 {
+public class JsFrameworkV1 extends JsFrameworkBaseV1 {
 
-    private String version;
+    private Long id;
 
-    private Date deprecated;
+    public JsFrameworkV1(Long id, String name, List<JsFrameworkVersionV1> versions, int rating) {
+        super(name, versions, rating);
+        this.id = id;
+    }
 }

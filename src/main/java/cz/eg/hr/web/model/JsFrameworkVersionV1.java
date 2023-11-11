@@ -1,16 +1,31 @@
 package cz.eg.hr.web.model;
 
-import java.util.List;
+import java.sql.Date;
 
 public class JsFrameworkVersionV1 {
 
-    private Long id;
+    private String version;
 
-    //TODO max 30
-    private String name;
+    private Date deprecated;
 
-    private List<JsFrameworkVersionV1> versions;
+    public JsFrameworkVersionV1(String version, Date deprecated) {
+        this.version = version;
+        this.deprecated = deprecated;
+    }
 
-    //TODO 1,2...5
-    private int rating;
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public Date getDeprecated() {
+        return deprecated;
+    }
+
+    public void setDeprecated(Date deprecated) {
+        this.deprecated = deprecated;
+    }
 }

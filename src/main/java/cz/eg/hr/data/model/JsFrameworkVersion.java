@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 public class JsFrameworkVersion {
@@ -20,11 +20,20 @@ public class JsFrameworkVersion {
      * and requirements for sorting and filtering
      * - wasn't specified, so keeping it as string so it's not limiting creation of
      * new framework
+     * TODO probably semantic versioning https://docs.npmjs.com/about-semantic-versioning
      */
     private String version;
 
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date deprecated;
+
+    public JsFrameworkVersion() {
+    }
+
+    public JsFrameworkVersion(String version, Date deprecated) {
+        this.version = version;
+        this.deprecated = deprecated;
+    }
 
     public Long getId() {
         return id;

@@ -14,8 +14,7 @@ public class JsFramework {
     @Column(nullable = false, length = 30)
     private String name;
 
-    @OneToMany
-    @JoinTable(name = "js_framework_version")
+    @OneToMany(cascade = CascadeType.ALL)
     private List<JsFrameworkVersion> versions;
 
     //TODO 1-5 constraint
@@ -24,16 +23,25 @@ public class JsFramework {
     public JsFramework() {
     }
 
+    public JsFramework(Long id, String name, List<JsFrameworkVersion> versions, int rating) {
+        this.id = id;
+        this.name = name;
+        this.versions = versions;
+        this.rating = rating;
+    }
+
+    public JsFramework(String name, List<JsFrameworkVersion> versions, int rating) {
+        this.name = name;
+        this.versions = versions;
+        this.rating = rating;
+    }
+
     public JsFramework(String name) {
         this.name = name;
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
