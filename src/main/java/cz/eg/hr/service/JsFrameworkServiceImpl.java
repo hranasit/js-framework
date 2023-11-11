@@ -21,7 +21,7 @@ public class JsFrameworkServiceImpl implements JsFrameworkService {
 
     @Override
     public Page<JsFramework> findAll(Pageable pageable) {
-        throw new NotYetImplementedException();
+        return jsFrameworkRepository.findAll(pageable);
     }
 
     @Override
