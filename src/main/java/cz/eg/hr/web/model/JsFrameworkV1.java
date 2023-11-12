@@ -10,4 +10,12 @@ public class JsFrameworkV1 extends JsFrameworkBaseV1 {
         super(name, versions, rating);
         this.id = id;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

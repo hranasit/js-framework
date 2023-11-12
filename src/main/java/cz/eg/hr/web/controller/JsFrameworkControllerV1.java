@@ -13,9 +13,14 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("v1/frameworks")
@@ -26,10 +31,18 @@ public class JsFrameworkControllerV1 {
 
 
     @PostMapping
-    public ResponseEntity<JsFrameworkV1> create(@RequestBody @Valid JsFrameworkBaseV1 data) {
+    public ResponseEntity<EntityModel<JsFrameworkV1>> create(@RequestBody @Valid JsFrameworkBaseV1 data) {
         JsFramework jsFramework = JsFrameworkBaseMapper.toDomain(data);
         JsFramework created = jsFrameworkService.create(jsFramework);
-        return new ResponseEntity<>(JsFrameworkMapper.toModel(created), HttpStatus.CREATED);
+        JsFrameworkV1 response = JsFrameworkMapper.toModel(created);
+
+        Link selfLink = WebMvcLinkBuilder.linkTo(methodOn(JsFrameworkControllerV1.class).create(data)).withSelfRel();
+        /**
+         * - links to other methods can be added depending on flow
+         * - would be on other EPs in controller too, except delete
+         */
+
+        return new ResponseEntity<>(EntityModel.of(response, selfLink), HttpStatus.CREATED);
     }
 
     //TODO fulltext somewhere
