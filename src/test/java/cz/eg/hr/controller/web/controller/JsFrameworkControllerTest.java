@@ -2,6 +2,7 @@ package cz.eg.hr.controller.web.controller;
 
 import cz.eg.hr.controller.AbstractJsFrameworkTest;
 import cz.eg.hr.web.model.JsFrameworkBaseV1;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -20,6 +21,11 @@ class JsFrameworkControllerTest extends AbstractJsFrameworkTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @BeforeEach
+    public void init() {
+        repository.saveAll(prepareJsFrameworks());
+    }
 
     @Test
     void contextLoads() {

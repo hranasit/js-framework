@@ -3,6 +3,7 @@ package cz.eg.hr.data.model;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class JsFramework {
@@ -76,5 +77,17 @@ public class JsFramework {
             ", versions=" + versions +
             ", rating=" + rating +
             '}';
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof JsFramework framework)) return false;
+        return rating == framework.rating && Objects.equals(id, framework.id) && Objects.equals(name, framework.name) && Objects.equals(versions, framework.versions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, versions, rating);
     }
 }

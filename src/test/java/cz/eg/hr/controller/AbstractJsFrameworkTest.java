@@ -25,11 +25,6 @@ public class AbstractJsFrameworkTest {
     @Autowired
     protected JsFrameworkRepository repository;
 
-    @BeforeEach
-    public void init() {
-        repository.saveAll(prepareJsFrameworks());
-    }
-
     protected JsFrameworkBaseV1 prepareJsFrameworkBaseV1() {
         List<JsFrameworkVersionV1> versions = Collections.singletonList(
             new JsFrameworkVersionV1("1.0.0", Date.valueOf("2022-06-05"))
