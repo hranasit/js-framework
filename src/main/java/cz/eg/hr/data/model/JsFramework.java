@@ -3,6 +3,7 @@ package cz.eg.hr.data.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import org.hibernate.search.annotations.Field;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,6 +16,7 @@ public class JsFramework {
     private Long id;
 
     @Column(nullable = false, length = 30)
+    @Field
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL)

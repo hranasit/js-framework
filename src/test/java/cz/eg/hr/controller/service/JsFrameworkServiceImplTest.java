@@ -49,6 +49,16 @@ public class JsFrameworkServiceImplTest extends AbstractJsFrameworkTest {
     }
 
     @Test
+    void search() {
+        //TODO every public method would have test, for negative and positive flows
+    }
+
+    @Test
+    void search_empty() {
+        //TODO every public method would have test, for negative and positive flows
+    }
+
+    @Test
     void update() {
         //TODO every public method would have test, for negative and positive flows
     }

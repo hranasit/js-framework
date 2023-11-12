@@ -20,6 +20,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
@@ -51,7 +54,10 @@ public class JsFrameworkControllerV1 {
         return jsFrameworkService.findAll(pageable).map(JsFrameworkMapper::toModel);
     }
 
-    //TODO fulltext implementation in progress on fulltext_search branch
+    @GetMapping
+    public List<JsFrameworkV1> search(@RequestParam String search) throws InterruptedException {
+        return jsFrameworkService.search(search).stream().map(JsFrameworkMapper::toModel).collect(Collectors.toList());
+    }
 
     @PatchMapping("/{id}")
     public ResponseEntity<JsFrameworkV1> update(@PathVariable Long id, @RequestBody JsonPatch data) throws JsonPatchException, JsonProcessingException {

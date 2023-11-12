@@ -7,6 +7,8 @@ import cz.eg.hr.data.model.JsFramework;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface JsFrameworkService {
     /*
      * NOTE: if there would be some complex logic/data enrichment/mapping,
@@ -17,6 +19,8 @@ public interface JsFrameworkService {
     JsFramework create(JsFramework jsFramework);
 
     Page<JsFramework> findAll(Pageable pageable);
+
+    List<JsFramework> search(String search) throws InterruptedException;
 
     JsFramework update(Long id, JsonPatch patch) throws JsonPatchException, JsonProcessingException;
 

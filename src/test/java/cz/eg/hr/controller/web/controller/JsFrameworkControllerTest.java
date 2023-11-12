@@ -90,6 +90,22 @@ class JsFrameworkControllerTest extends AbstractJsFrameworkTest {
     }
 
     @Test
+    void search() throws Exception {
+        mockMvc.perform(
+            MockMvcRequestBuilders
+                .get("/v1/frameworks")
+                .queryParam("search","Rea")
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void search_empty() {
+        //TODO
+    }
+
+    @Test
     void update() {
         //TODO
     }
