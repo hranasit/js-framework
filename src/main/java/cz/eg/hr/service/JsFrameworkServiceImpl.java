@@ -8,7 +8,6 @@ import com.github.fge.jsonpatch.JsonPatchException;
 import cz.eg.hr.data.model.JsFramework;
 import cz.eg.hr.data.repository.JsFrameworkRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,6 +37,7 @@ public class JsFrameworkServiceImpl implements JsFrameworkService {
         if (origin.isEmpty()) {
             throw new EntityNotFoundException();
         }
+
         JsFramework jsFramework = applyPatch(patch, origin.get());
 
         return jsFrameworkRepository.save(jsFramework);

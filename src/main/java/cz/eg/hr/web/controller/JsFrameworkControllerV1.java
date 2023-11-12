@@ -37,7 +37,7 @@ public class JsFrameworkControllerV1 {
         JsFrameworkV1 response = JsFrameworkMapper.toModel(created);
 
         Link selfLink = WebMvcLinkBuilder.linkTo(methodOn(JsFrameworkControllerV1.class).create(data)).withSelfRel();
-        /**
+        /*
          * - link should be to read one EP
          * - links to other methods can be added depending on flow
          * - would be on other EPs in controller too, except delete
@@ -46,11 +46,12 @@ public class JsFrameworkControllerV1 {
         return new ResponseEntity<>(EntityModel.of(response, selfLink), HttpStatus.CREATED);
     }
 
-    //TODO fulltext somewhere
     @GetMapping
     public Page<JsFrameworkV1> list(Pageable pageable) {
         return jsFrameworkService.findAll(pageable).map(JsFrameworkMapper::toModel);
     }
+
+    //TODO fulltext implementation in progress on fulltext_search branch
 
     @PatchMapping("/{id}")
     public ResponseEntity<JsFrameworkV1> update(@PathVariable Long id, @RequestBody JsonPatch data) throws JsonPatchException, JsonProcessingException {

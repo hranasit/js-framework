@@ -1,6 +1,8 @@
 package cz.eg.hr.data.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 import java.util.List;
 import java.util.Objects;
@@ -18,7 +20,8 @@ public class JsFramework {
     @OneToMany(cascade = CascadeType.ALL)
     private List<JsFrameworkVersion> versions;
 
-    //TODO 1-5 constraint
+    @Min(1)
+    @Max(5)
     private int rating;
 
     public JsFramework() {
@@ -82,12 +85,13 @@ public class JsFramework {
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
-        if (!(object instanceof JsFramework framework)) return false;
-        return rating == framework.rating && Objects.equals(id, framework.id) && Objects.equals(name, framework.name) && Objects.equals(versions, framework.versions);
+        if (object == null || getClass() != object.getClass()) return false;
+        JsFramework framework = (JsFramework) object;
+        return Objects.equals(id, framework.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, versions, rating);
+        return Objects.hash(id);
     }
 }

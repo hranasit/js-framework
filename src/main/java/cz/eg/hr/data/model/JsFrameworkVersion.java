@@ -15,7 +15,7 @@ public class JsFrameworkVersion {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    /**
+    /*
      * data type depends on type of versioning (serial, semantic, calendar, git hash)
      * and requirements for sorting and filtering
      * - wasn't specified, so keeping it as string so it's not limiting creation of

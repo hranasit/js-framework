@@ -8,9 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface JsFrameworkService {
-    /**
+    /*
      * NOTE: if there would be some complex logic/data enrichment/mapping,
-     * service layer would use service objectsand map them between data object and api objects
+     * service layer would use service objects and map them between data object and api objects
      * - this is very simplified and mapping is only between data and api objects
      */
 
