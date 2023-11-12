@@ -1,4 +1,4 @@
-package cz.eg.hr.rest;
+package cz.eg.hr.web.error;
 
 import java.util.List;
 

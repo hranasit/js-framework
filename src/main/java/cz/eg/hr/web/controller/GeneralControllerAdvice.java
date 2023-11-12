@@ -1,7 +1,11 @@
 package cz.eg.hr.web.controller;
 
-import cz.eg.hr.rest.Errors;
-import cz.eg.hr.rest.ValidationError;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.fge.jsonpatch.JsonPatchException;
+import cz.eg.hr.web.error.Errors;
+import cz.eg.hr.web.error.ValidationError;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -23,4 +27,14 @@ public class GeneralControllerAdvice {
         return ResponseEntity.badRequest().body(new Errors(errorList));
     }
 
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<String> handleEntityNotFoundException(EntityNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({JsonPatchException.class, JsonProcessingException.class})
+    public ResponseEntity<String> handleJsonException(Exception ex) {
+        HttpStatus status = (ex instanceof JsonPatchException) ? HttpStatus.BAD_REQUEST : HttpStatus.INTERNAL_SERVER_ERROR;
+        return new ResponseEntity<>(ex.getMessage(), status);
+    }
 }
