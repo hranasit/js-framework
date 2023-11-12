@@ -26,7 +26,7 @@ public class JsFrameworkControllerV1 {
 
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody @Valid JsFrameworkBaseV1 data) {
+    public ResponseEntity<JsFrameworkV1> create(@RequestBody @Valid JsFrameworkBaseV1 data) {
         JsFramework jsFramework = JsFrameworkBaseMapper.toDomain(data);
         JsFramework created = jsFrameworkService.create(jsFramework);
         return new ResponseEntity<>(JsFrameworkMapper.toModel(created), HttpStatus.CREATED);
@@ -40,8 +40,8 @@ public class JsFrameworkControllerV1 {
 
     @PatchMapping("/{id}")
     public ResponseEntity<JsFrameworkV1> update(@PathVariable Long id, @RequestBody JsonPatch data) throws JsonPatchException, JsonProcessingException {
-        jsFrameworkService.update(id, data);
-        return new ResponseEntity<>(HttpStatus.OK);
+        JsFramework updated = jsFrameworkService.update(id, data);
+        return new ResponseEntity<>(JsFrameworkMapper.toModel(updated), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

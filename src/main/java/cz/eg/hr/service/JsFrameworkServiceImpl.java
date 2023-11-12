@@ -33,14 +33,14 @@ public class JsFrameworkServiceImpl implements JsFrameworkService {
     }
 
     @Override
-    public void update(Long id, JsonPatch patch) throws JsonPatchException, JsonProcessingException {
+    public JsFramework update(Long id, JsonPatch patch) throws JsonPatchException, JsonProcessingException {
         Optional<JsFramework> origin = jsFrameworkRepository.findById(id);
         if (origin.isEmpty()) {
             throw new EntityNotFoundException();
         }
         JsFramework jsFramework = applyPatch(patch, origin.get());
 
-        jsFrameworkRepository.save(jsFramework);
+        return jsFrameworkRepository.save(jsFramework);
     }
 
     @Override

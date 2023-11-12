@@ -18,7 +18,7 @@ public interface JsFrameworkService {
 
     Page<JsFramework> findAll(Pageable pageable);
 
-    void update(Long id, JsonPatch patch) throws JsonPatchException, JsonProcessingException;
+    JsFramework update(Long id, JsonPatch patch) throws JsonPatchException, JsonProcessingException;
 
     void delete(Long id);
 }

@@ -2,7 +2,6 @@ package cz.eg.hr.controller.service;
 
 import cz.eg.hr.controller.AbstractJsFrameworkTest;
 import cz.eg.hr.data.model.JsFramework;
-import cz.eg.hr.data.repository.JsFrameworkRepository;
 import cz.eg.hr.service.JsFrameworkService;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
